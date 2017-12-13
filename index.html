@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Browser and Mobile Detect</title>
+    <script src="./bowser.js"></script>
+    <style>
+        div#container {
+            width: 80%;
+            margin: auto 30px;
+        }
+
+        #details {
+            list-style: none;
+        }
+
+        #details li {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="details"></ul>
+    </div>
+    <script type="text/javascript">
+        var browser = bowser;
+        var final = '';
+        var minBrowserVersion = {
+            msie: "10",
+            firefox: "23",
+            chrome: "29",
+            safari: "5.1",
+            opera: "16"
+        };
+        var ua = navigator.userAgent;
+        if (browser.isUnsupportedBrowser(minBrowserVersion, true, ua)) {
+            var result = browser._detect(ua);
+            var keys = Object.keys(result);
+            for (var i = 0; i < keys.length; i++) {
+                final = final + `<li class="info">${ keys[i] + ' - ' + result[keys[i]]}</li>`;
+            }
+            document.getElementById('details').innerHTML = final;
+        }
+    </script>
+</body>
+
+</html>
